@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AGRA - Mel puro, sabor que vem da natureza." />
+  <meta name="theme-color" content="#fffaf0" />
+  <title>AGRA | Loja de Mel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar" id="inicio">
+    <div class="container nav-wrap">
+      <a class="brand" href="#inicio" aria-label="AGRA - Início">
+        <img src="assets/logo-agra.png" alt="Logo AGRA" />
+        <span>AGRA</span>
+      </a>
+
+      <div class="nav-actions">
+        <nav class="nav" id="navMenu">
+          <a href="#inicio">Início</a>
+          <a href="#produtos">Loja</a>
+          <a href="#sobre">Sobre</a>
+          <a href="#qualidade">Qualidade</a>
+          <a class="nav-cta" href="#produtos">Comprar agora</a>
+        </nav>
+
+        <button class="cart-trigger" id="cartTrigger" type="button" aria-label="Abrir carrinho">
+          <span class="cart-icon" aria-hidden="true">🛒</span>
+          <span class="cart-trigger-label">Carrinho</span>
+          <span class="cart-count" id="cartCount">0</span>
+        </button>
+
+        <button class="menu-btn" id="menuBtn" aria-label="Abrir menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow">100% natural • selecionado com cuidado</span>
+          <h1>Mel puro, sabor que vem da natureza.</h1>
+          <p>
+            Conheça a linha AGRA e escolha o tamanho ideal para sua rotina.
+            Uma experiência de compra simples, bonita e pensada para funcionar perfeitamente no celular.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#produtos">Comprar mel</a>
+            <a class="btn btn-ghost" href="#sobre">Conhecer a AGRA</a>
+          </div>
+          <div class="hero-points">
+            <span>✓ Compra segura</span>
+            <span>✓ Envio para todo o Brasil</span>
+            <span>✓ Atendimento rápido</span>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-label="Identidade visual AGRA">
+          <div class="glow"></div>
+          <img src="assets/logo-agra.png" alt="Pote de mel AGRA" />
+        </div>
+      </div>
+    </section>
+
+    <section class="trust-strip" aria-label="Diferenciais AGRA">
+      <div class="container trust-grid">
+        <div><strong>Mel selecionado</strong><span>Sabor e qualidade</span></div>
+        <div><strong>Embalagem premium</strong><span>Bonita e segura</span></div>
+        <div><strong>Atendimento próximo</strong><span>Compra simples e rápida</span></div>
+        <div><strong>Entrega acompanhada</strong><span>Do pedido até sua casa</span></div>
+      </div>
+    </section>
+
+    <section class="section shop-section" id="produtos">
+      <div class="container">
+        <div class="shop-head">
+          <div class="section-heading">
+            <span class="eyebrow">Loja AGRA</span>
+            <h2>Escolha o seu mel</h2>
+            <p>Veja os tamanhos disponíveis e abra os detalhes de cada produto.</p>
+          </div>
+          <div class="catalog-count" id="catalogCount" aria-live="polite"></div>
+        </div>
+
+        <div class="catalog-toolbar" aria-label="Filtros da loja">
+          <div class="filter-group" id="filterGroup">
+            <button class="filter-btn active" type="button" data-filter="todos">Todos</button>
+            <button class="filter-btn" type="button" data-filter="individual">Potes</button>
+          </div>
+          <label class="search-box">
+            <span aria-hidden="true">⌕</span>
+            <input id="productSearch" type="search" placeholder="Buscar produto" autocomplete="off" />
+          </label>
+        </div>
+
+        <div class="products-grid" id="productsGrid" aria-live="polite"></div>
+
+        <div class="catalog-note">
+          <strong>Catálogo AGRA:</strong> atualmente disponível nas embalagens de 500 g e 1 kg. Adicione seus produtos ao carrinho e ajuste as quantidades antes de finalizar a compra.
+        </div>
+      </div>
+    </section>
+
+    <section class="section about" id="sobre">
+      <div class="container about-grid">
+        <div class="about-card">
+          <span class="mini-label">AGRA</span>
+          <img class="about-logo" src="assets/logo-agra.png" alt="Identidade AGRA" />
+        </div>
+        <div class="about-copy">
+          <span class="eyebrow">Nossa essência</span>
+          <h2>Um produto natural com apresentação à altura.</h2>
+          <p>
+            A AGRA nasce com a proposta de transformar a compra de mel em uma experiência
+            mais bonita, confiável e especial — unindo natureza, qualidade e identidade própria.
+          </p>
+          <p>
+            A estrutura da loja foi preparada para evoluir sem precisar reconstruir o site:
+            produtos, carrinho, checkout, pagamento e painel administrativo serão conectados às próximas etapas.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section quality" id="qualidade">
+      <div class="container">
+        <div class="section-heading compact">
+          <span class="eyebrow">Por que AGRA?</span>
+          <h2>Simples, natural e marcante.</h2>
+        </div>
+        <div class="quality-grid">
+          <article><span>01</span><h3>Sabor natural</h3><p>Produto pensado para quem valoriza qualidade no dia a dia.</p></article>
+          <article><span>02</span><h3>Identidade premium</h3><p>Uma marca forte, limpa e preparada para crescer no digital.</p></article>
+          <article><span>03</span><h3>Compra fácil</h3><p>Site responsivo e organizado para uma navegação confortável no celular.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <div class="container cta-box">
+        <div>
+          <span class="eyebrow light">AGRA</span>
+          <h2>Seu mel favorito, a poucos cliques.</h2>
+          <p>Escolha seu tamanho, adicione ao carrinho e organize seu pedido em poucos cliques.</p>
+        </div>
+        <a href="#produtos" class="btn btn-light">Ver produtos</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <img src="assets/logo-agra.png" alt="Logo AGRA" />
+        <div><strong>AGRA</strong><span>Mel puro, sabor que vem da natureza.</span></div>
+      </div>
+      <div class="footer-links">
+        <a href="#inicio">Início</a>
+        <a href="#produtos">Loja</a>
+        <a href="#sobre">Sobre</a>
+        <a href="admin.html">Área administrativa</a>
+      </div>
+      <p>© <span id="year"></span> AGRA. Todos os direitos reservados.</p>
+    </div>
+  </footer>
+
+  <div class="modal-backdrop" id="productModal" hidden>
+    <section class="product-modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <button class="modal-close" id="modalClose" type="button" aria-label="Fechar detalhes">×</button>
+      <div class="modal-product-image">
+        <img src="assets/logo-agra.png" alt="Produto AGRA" />
+      </div>
+      <div class="modal-copy">
+        <span class="modal-kicker" id="modalKicker">AGRA</span>
+        <h2 id="modalTitle"></h2>
+        <p class="modal-description" id="modalDescription"></p>
+        <div class="modal-meta">
+          <div><span>Peso</span><strong id="modalWeight"></strong></div>
+          <div><span>Disponibilidade</span><strong id="modalStock"></strong></div>
+        </div>
+        <div class="modal-price" id="modalPrice">Preço a definir</div>
+        <div class="modal-info-box">
+          Produto disponível para adicionar ao carrinho. Os preços oficiais ainda serão definidos antes da etapa de pagamento.
+        </div>
+        <button class="btn btn-primary modal-action" id="modalAddToCart" type="button">Adicionar ao carrinho</button>
+      </div>
+    </section>
+  </div>
+
+  <div class="cart-backdrop" id="cartBackdrop" hidden></div>
+  <aside class="cart-drawer" id="cartDrawer" aria-hidden="true" aria-labelledby="cartTitle">
+    <div class="cart-header">
+      <div>
+        <span class="cart-kicker">Seu pedido</span>
+        <h2 id="cartTitle">Carrinho</h2>
+      </div>
+      <button class="cart-close" id="cartClose" type="button" aria-label="Fechar carrinho">×</button>
+    </div>
+
+    <div class="cart-body" id="cartItems"></div>
+
+    <div class="cart-footer">
+      <div class="cart-summary-row">
+        <span>Itens</span>
+        <strong id="cartItemsTotal">0</strong>
+      </div>
+      <div class="cart-summary-row total-row">
+        <span>Total</span>
+        <strong id="cartTotal">A definir</strong>
+      </div>
+      <p class="cart-price-note">Os preços oficiais ainda não foram informados. Você já pode testar todo o fluxo de checkout; o pagamento será conectado em uma etapa posterior.</p>
+      <button class="btn btn-primary checkout-btn" id="checkoutBtn" type="button">Ir para checkout</button>
+      <button class="clear-cart-btn" id="clearCart" type="button">Limpar carrinho</button>
+    </div>
+  </aside>
+
+
+  <div class="checkout-backdrop" id="checkoutBackdrop" hidden>
+    <section class="checkout-panel" role="dialog" aria-modal="true" aria-labelledby="checkoutTitle">
+      <div class="checkout-header">
+        <div>
+          <span class="cart-kicker">Finalização do pedido</span>
+          <h2 id="checkoutTitle">Checkout</h2>
+        </div>
+        <button class="checkout-close" id="checkoutClose" type="button" aria-label="Fechar checkout">×</button>
+      </div>
+
+      <div class="checkout-progress" aria-label="Etapas da compra">
+        <div class="done"><span>1</span><strong>Carrinho</strong></div>
+        <div class="active"><span>2</span><strong>Dados e entrega</strong></div>
+        <div><span>3</span><strong>Pagamento</strong></div>
+      </div>
+
+      <div class="checkout-layout">
+        <form class="checkout-form" id="checkoutForm" novalidate>
+          <section class="checkout-card">
+            <div class="checkout-card-title">
+              <span>01</span>
+              <div><h3>Seus dados</h3><p>Para contato e identificação do pedido.</p></div>
+            </div>
+
+            <div class="form-grid">
+              <label class="field field-full">
+                <span>Nome completo *</span>
+                <input id="customerName" name="name" type="text" autocomplete="name" required minlength="3" placeholder="Seu nome completo">
+                <small class="field-error"></small>
+              </label>
+              <label class="field">
+                <span>CPF *</span>
+                <input id="customerCpf" name="cpf" type="text" inputmode="numeric" autocomplete="off" required maxlength="14" placeholder="000.000.000-00">
+                <small class="field-error"></small>
+              </label>
+              <label class="field">
+                <span>Telefone / WhatsApp *</span>
+                <input id="customerPhone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required maxlength="15" placeholder="(00) 00000-0000">
+                <small class="field-error"></small>
+              </label>
+              <label class="field field-full">
+                <span>E-mail *</span>
+                <input id="customerEmail" name="email" type="email" autocomplete="email" required placeholder="voce@exemplo.com">
+                <small class="field-error"></small>
+              </label>
+            </div>
+          </section>
+
+          <section class="checkout-card">
+            <div class="checkout-card-title">
+              <span>02</span>
+              <div><h3>Endereço de entrega</h3><p>Digite o CEP para preencher o endereço automaticamente.</p></div>
+            </div>
+
+            <div class="form-grid address-grid">
+              <label class="field cep-field">
+                <span>CEP *</span>
+                <div class="input-with-status">
+                  <input id="customerCep" name="cep" type="text" inputmode="numeric" autocomplete="postal-code" required maxlength="9" placeholder="00000-000">
+                  <span class="cep-status" id="cepStatus" aria-live="polite"></span>
+                </div>
+                <small class="field-error"></small>
+              </label>
+              <label class="field street-field">
+                <span>Rua / Avenida *</span>
+                <input id="customerStreet" name="street" type="text" autocomplete="address-line1" required placeholder="Endereço">
+                <small class="field-error"></small>
+              </label>
+              <label class="field number-field">
+                <span>Número *</span>
+                <input id="customerNumber" name="number" type="text" autocomplete="address-line2" required placeholder="123">
+                <small class="field-error"></small>
+              </label>
+              <label class="field complement-field">
+                <span>Complemento</span>
+                <input id="customerComplement" name="complement" type="text" placeholder="Apto, bloco, referência...">
+              </label>
+              <label class="field">
+                <span>Bairro *</span>
+                <input id="customerDistrict" name="district" type="text" required placeholder="Bairro">
+                <small class="field-error"></small>
+              </label>
+              <label class="field">
+                <span>Cidade *</span>
+                <input id="customerCity" name="city" type="text" autocomplete="address-level2" required placeholder="Cidade">
+                <small class="field-error"></small>
+              </label>
+              <label class="field state-field">
+                <span>UF *</span>
+                <input id="customerState" name="state" type="text" autocomplete="address-level1" required maxlength="2" placeholder="SP">
+                <small class="field-error"></small>
+              </label>
+            </div>
+          </section>
+
+          <section class="checkout-card" id="shippingCard">
+            <div class="checkout-card-title">
+              <span>03</span>
+              <div><h3>Opções de entrega</h3><p>As opções aparecem automaticamente depois que o CEP é identificado.</p></div>
+            </div>
+
+            <div class="shipping-placeholder" id="shippingPlaceholder">
+              <span aria-hidden="true">📦</span>
+              <div><strong>Informe seu CEP</strong><p>Preencha o endereço acima para calcular as opções de entrega.</p></div>
+            </div>
+            <div class="shipping-options" id="shippingOptions" hidden></div>
+            <small class="shipping-error" id="shippingError" aria-live="polite"></small>
+            <p class="shipping-dev-note"><strong>Simulação de desenvolvimento:</strong> os valores e prazos desta etapa usam uma tabela demonstrativa por região. Antes de publicar a loja, conectaremos um serviço real de frete para trazer valores oficiais.</p>
+          </section>
+
+          <section class="checkout-card" id="paymentCard">
+            <div class="checkout-card-title">
+              <span>04</span>
+              <div><h3>Forma de pagamento</h3><p>Escolha como deseja pagar. Nenhum dado de cartão é digitado neste site.</p></div>
+            </div>
+
+            <div class="payment-options" id="paymentOptions">
+              <label class="payment-option">
+                <input type="radio" name="paymentMethod" value="pix">
+                <span class="payment-radio"></span>
+                <span class="payment-icon" aria-hidden="true">◆</span>
+                <span class="payment-copy">
+                  <strong>PIX</strong>
+                  <small>Na versão publicada, o QR Code e o código copia e cola serão gerados pelo gateway de pagamento.</small>
+                  <em>Confirmação rápida</em>
+                </span>
+              </label>
+              <label class="payment-option">
+                <input type="radio" name="paymentMethod" value="card">
+                <span class="payment-radio"></span>
+                <span class="payment-icon" aria-hidden="true">▣</span>
+                <span class="payment-copy">
+                  <strong>Cartão de crédito</strong>
+                  <small>O pagamento será feito em ambiente seguro do gateway. A AGRA não armazenará número ou código de segurança do cartão.</small>
+                  <em>Checkout protegido</em>
+                </span>
+              </label>
+            </div>
+            <small class="payment-error" id="paymentError" aria-live="polite"></small>
+            <p class="payment-dev-note"><strong>Etapa de desenvolvimento:</strong> por enquanto a seleção é demonstrativa. Nenhuma cobrança real será realizada.</p>
+          </section>
+
+          <div class="checkout-security-note">
+            <span aria-hidden="true">🔒</span>
+            <p><strong>Etapa de desenvolvimento.</strong> Com o Firebase configurado, os dados necessários do pedido são enviados ao banco. O CPF não é armazenado nesta etapa e nenhuma cobrança é processada.</p>
+          </div>
+
+          <button class="btn btn-primary checkout-submit" type="submit">Revisar pedido</button>
+        </form>
+
+        <aside class="checkout-summary">
+          <span class="cart-kicker">Resumo</span>
+          <h3>Seu pedido</h3>
+          <div class="checkout-summary-items" id="checkoutSummaryItems"></div>
+          <div class="checkout-summary-line"><span>Produtos</span><strong id="checkoutSummaryQuantity">0 itens</strong></div>
+          <div class="checkout-summary-line"><span>Frete</span><strong id="checkoutSummaryShipping">Informe o CEP</strong></div>
+          <div class="checkout-summary-line"><span>Pagamento</span><strong id="checkoutSummaryPayment">Escolha uma opção</strong></div>
+          <div class="checkout-summary-line checkout-summary-total"><span>Total</span><strong id="checkoutSummaryTotal">A definir</strong></div>
+          <p>O frete e o pagamento ainda são demonstrativos. Produtos e pedidos já podem ser conectados ao Firebase nesta etapa.</p>
+        </aside>
+      </div>
+
+      <div class="checkout-success" id="checkoutSuccess" hidden>
+        <div class="success-icon">✓</div>
+        <span class="eyebrow">Revisão do pedido</span>
+        <h2>Confira antes de confirmar.</h2>
+        <p>Revise cliente, entrega e forma de pagamento. Esta versão não realiza cobrança real.</p>
+        <div class="review-box" id="checkoutReview"></div>
+        <div class="payment-warning"><strong>Pagamento demonstrativo:</strong> ao confirmar abaixo será criado apenas um pedido de teste, sem cobrança.</div>
+        <button class="btn btn-primary" id="confirmOrderTest" type="button">Confirmar pedido</button>
+        <button class="btn btn-ghost" id="backToCheckout" type="button">Editar dados</button>
+      </div>
+
+      <div class="order-confirmed" id="orderConfirmed" hidden>
+        <div class="success-icon">✓</div>
+        <span class="eyebrow">Pedido criado</span>
+        <h2>Pedido de teste registrado.</h2>
+        <p>Use este fluxo para validar a experiência da loja antes de conectarmos o banco de dados e o gateway.</p>
+        <div class="order-number-box">
+          <span>Número do pedido</span>
+          <strong id="orderNumber">AGRA-000000</strong>
+        </div>
+        <div class="order-status-box">
+          <span>Status</span>
+          <strong>Aguardando integração de pagamento</strong>
+        </div>
+        <button class="btn btn-primary" id="finishCheckoutTest" type="button">Voltar para a loja</button>
+      </div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore-compat.js"></script>
+  <script src="firebase-config.js"></script>
+  <script src="firebase-service.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
