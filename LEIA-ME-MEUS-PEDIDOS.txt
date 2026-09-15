@@ -1,0 +1,37 @@
+AGRA — MEUS PEDIDOS + RASTREAMENTO
+
+SUBSTITUA NA RAIZ DO GITHUB:
+- index.html
+- styles.css
+- script.js
+- firebase-service.js
+- admin.html
+- admin.css
+- admin.js
+
+FIREBASE:
+- Abra Firebase Console > Firestore Database > Regras
+- Substitua as regras atuais pelo conteúdo de firestore.rules
+- Clique em Publicar
+
+O QUE FOI ADICIONADO:
+- "Meus pedidos" no menu da loja
+- Linha do tempo do status do pedido
+- Código de rastreio, transportadora, botão copiar e link de rastreio
+- Campos de rastreio no painel administrativo
+- Botão "Acompanhar em Meus pedidos" após a compra
+
+IMPORTANTE:
+Nesta versão gratuita e sem cadastro de cliente, os pedidos ficam associados ao
+Firebase Authentication anônimo salvo no mesmo navegador/aparelho. Se o cliente
+trocar de celular/navegador ou apagar os dados do navegador, os pedidos anteriores
+não aparecem automaticamente.
+
+TESTE:
+1. Publique os arquivos no GitHub.
+2. Publique firestore.rules no Firebase.
+3. Aguarde o GitHub Pages atualizar.
+4. Abra no celular: https://thesystemm.github.io/AGRA-mel-loja/?v=3
+5. Faça um pedido.
+6. No admin, altere o status e preencha o rastreio.
+7. Na loja, abra "Meus pedidos" e clique em "Atualizar pedidos".

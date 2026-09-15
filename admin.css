@@ -15,3 +15,59 @@
 
 .image-upload-block{gap:8px}.image-upload-row{display:flex;align-items:center;gap:14px;padding:12px;border:1px solid var(--line);border-radius:14px;background:#fffaf5}.image-upload-preview{width:96px;height:96px;object-fit:cover;border-radius:14px;background:#f4ede2;border:1px solid var(--line);flex:0 0 96px}.image-upload-controls{display:flex;align-items:center;gap:9px;flex-wrap:wrap;min-width:0}.file-picker{display:inline-flex!important;align-items:center;justify-content:center;padding:10px 14px;border-radius:11px;background:var(--ink);color:#fff!important;font-weight:800!important;cursor:pointer}.compact-btn{padding:9px 12px}.image-upload-status{width:100%;font-size:12px;color:var(--muted);font-weight:500;line-height:1.35}.image-upload-status.ok{color:var(--ok)}.image-upload-status.error{color:var(--danger)}.product-image-tools{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:2px}.product-image-tools .file-picker{font-size:12px;padding:9px 12px}.product-image-tools .secondary-btn{font-size:12px;padding:8px 11px}.product-image-note{font-size:11px;color:var(--muted);line-height:1.35;flex:1 1 180px}.product-editor-head img[data-image-preview]{transition:opacity .18s}.product-editor-head img[data-image-preview].processing{opacity:.45}
 @media(max-width:560px){.image-upload-row{align-items:flex-start}.image-upload-preview{width:82px;height:82px;flex-basis:82px}.image-upload-controls{flex:1}.file-picker,.compact-btn{width:100%}}
+
+
+/* ===== RASTREAMENTO NO PAINEL ===== */
+.tracking-admin {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid #eadbc8;
+}
+.tracking-admin-title {
+  display: flex;
+  justify-content: space-between;
+  gap: 14px;
+  align-items: baseline;
+  margin-bottom: 12px;
+}
+.tracking-admin-title strong { color: #2f2115; }
+.tracking-admin-title span { color: #8a735c; font-size: .82rem; text-align: right; }
+.tracking-admin-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.4fr auto;
+  gap: 10px;
+  align-items: end;
+}
+.tracking-admin-grid label {
+  display: grid;
+  gap: 6px;
+  color: #694f36;
+  font-size: .78rem;
+  font-weight: 700;
+}
+.tracking-admin-grid input {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid #e3cfb2;
+  background: #fff;
+  border-radius: 12px;
+  padding: 11px 12px;
+  font: inherit;
+  color: #2f2115;
+}
+.tracking-admin-grid input:focus {
+  outline: 2px solid rgba(218, 154, 43, .18);
+  border-color: #d79b36;
+}
+.tracking-save-btn { min-height: 42px; }
+@media (max-width: 980px) {
+  .tracking-admin-grid { grid-template-columns: 1fr 1fr; }
+  .tracking-url-field { grid-column: 1 / -1; }
+  .tracking-save-btn { width: 100%; }
+}
+@media (max-width: 620px) {
+  .tracking-admin-title { display: block; }
+  .tracking-admin-title span { display: block; margin-top: 5px; text-align: left; }
+  .tracking-admin-grid { grid-template-columns: 1fr; }
+  .tracking-url-field { grid-column: auto; }
+}

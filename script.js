@@ -953,3 +953,178 @@ finishCheckoutTest?.addEventListener('click', () => {
 document.addEventListener('keydown', event => {
   if (event.key === 'Escape' && checkoutBackdrop && !checkoutBackdrop.hidden) closeCheckout();
 });
+
+
+/* ===== MEUS PEDIDOS ===== */
+const myOrdersList = document.getElementById('myOrdersList');
+const refreshMyOrdersBtn = document.getElementById('refreshMyOrders');
+const myOrdersLink = document.getElementById('myOrdersLink');
+const goToMyOrdersBtn = document.getElementById('goToMyOrders');
+
+const ORDER_STATUS_LABELS = {
+  novo: 'Pedido recebido',
+  confirmado: 'Pedido confirmado',
+  separando: 'Em preparação',
+  enviado: 'Pedido enviado',
+  entregue: 'Entregue',
+  cancelado: 'Cancelado'
+};
+
+const ORDER_STEPS = [
+  ['novo', 'Recebido'],
+  ['confirmado', 'Confirmado'],
+  ['separando', 'Preparando'],
+  ['enviado', 'Enviado'],
+  ['entregue', 'Entregue']
+];
+
+function orderDateText(timestamp) {
+  const date = timestamp?.toDate?.() || (timestamp ? new Date(timestamp) : null);
+  if (!date || Number.isNaN(date.getTime())) return 'Data indisponível';
+  return date.toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' });
+}
+
+function safeTrackingUrl(value = '') {
+  const url = String(value || '').trim();
+  return /^https?:\/\//i.test(url) ? url : '';
+}
+
+function renderOrderTimeline(status) {
+  if (status === 'cancelado') return '<div class="order-status-chip cancelado">Pedido cancelado</div>';
+  const found = ORDER_STEPS.findIndex(([key]) => key === status);
+  const currentIndex = found >= 0 ? found : 0;
+  return `
+    <div class="order-timeline" aria-label="Andamento do pedido">
+      ${ORDER_STEPS.map(([key, label], index) => `
+        <div class="order-step ${index < currentIndex ? 'done' : ''} ${index === currentIndex ? 'current' : ''}">
+          <span>${label}</span>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function renderTracking(order) {
+  const tracking = order?.tracking || {};
+  const code = String(tracking.code || '').trim();
+  const carrier = String(tracking.carrier || '').trim();
+  const savedUrl = safeTrackingUrl(tracking.url);
+  const fallbackUrl = /correios/i.test(carrier) ? 'https://rastreamento.correios.com.br/app/index.php' : '';
+  const url = savedUrl || fallbackUrl;
+
+  if (!code) {
+    const message = order.status === 'enviado' || order.status === 'entregue'
+      ? 'A encomenda já foi despachada. O código de rastreio ainda não foi informado.'
+      : 'O código aparecerá aqui assim que o pedido for despachado.';
+    return `
+      <div class="order-tracking-box">
+        <div><strong>Rastreamento</strong><span>${message}</span></div>
+      </div>
+    `;
+  }
+
+  return `
+    <div class="order-tracking-box">
+      <div>
+        <strong>Rastreamento${carrier ? ` • ${escapeHTML(carrier)}` : ''}</strong>
+        <span>Código de rastreio</span>
+        <span class="tracking-code">${escapeHTML(code)}</span>
+      </div>
+      <div class="tracking-actions">
+        <button class="tracking-btn" type="button" data-copy-tracking="${escapeHTML(code)}">Copiar código</button>
+        ${url ? `<a class="tracking-btn primary" href="${escapeHTML(url)}" target="_blank" rel="noopener noreferrer">Acompanhar entrega</a>` : ''}
+      </div>
+    </div>
+  `;
+}
+
+function customerOrderCard(order) {
+  const items = Array.isArray(order.items) ? order.items : [];
+  const status = String(order.status || 'novo');
+  const statusLabel = ORDER_STATUS_LABELS[status] || status;
+  return `
+    <article class="customer-order-card">
+      <div class="customer-order-top">
+        <div>
+          <h3>${escapeHTML(order.orderNumber || order.id || 'Pedido')}</h3>
+          <p>${orderDateText(order.createdAt)} • ${escapeHTML(order.paymentMethod === 'card' ? 'Cartão' : 'PIX')}</p>
+          <span class="order-status-chip ${escapeHTML(status)}">${escapeHTML(statusLabel)}</span>
+        </div>
+        <strong class="customer-order-total">${typeof order.total === 'number' ? formatPrice(order.total) : 'Total a definir'}</strong>
+      </div>
+      <div class="customer-order-body">
+        <div class="customer-order-items">
+          ${items.map(item => `
+            <div class="customer-order-item">
+              <span>${Number(item.quantity) || 1}× ${escapeHTML(item.name || item.productId || 'Produto')}</span>
+              <strong>${typeof item.unitPrice === 'number' ? formatPrice(item.unitPrice * (Number(item.quantity) || 1)) : ''}</strong>
+            </div>
+          `).join('')}
+        </div>
+        ${renderOrderTimeline(status)}
+        ${renderTracking(order)}
+      </div>
+    </article>
+  `;
+}
+
+async function loadMyOrders() {
+  if (!myOrdersList) return;
+  if (!window.AgraDB?.configured || typeof window.AgraDB.listMyOrders !== 'function') {
+    myOrdersList.innerHTML = `
+      <div class="my-orders-error">
+        <strong>Não foi possível acessar seus pedidos.</strong><br>
+        Atualize a página e tente novamente.
+      </div>`;
+    return;
+  }
+
+  if (refreshMyOrdersBtn) refreshMyOrdersBtn.disabled = true;
+  myOrdersList.innerHTML = '<div class="my-orders-loading">Atualizando seus pedidos…</div>';
+
+  try {
+    const orders = await window.AgraDB.listMyOrders();
+    if (!orders.length) {
+      myOrdersList.innerHTML = `
+        <div class="my-orders-empty">
+          <div class="my-orders-empty-icon">📦</div>
+          <strong>Você ainda não tem pedidos neste navegador.</strong>
+          <p>Quando finalizar uma compra, o andamento aparecerá aqui.</p>
+        </div>`;
+      return;
+    }
+    myOrdersList.innerHTML = orders.map(customerOrderCard).join('');
+  } catch (error) {
+    console.error('Erro ao carregar Meus pedidos:', error);
+    myOrdersList.innerHTML = `
+      <div class="my-orders-error">
+        <strong>Não foi possível carregar seus pedidos.</strong><br>
+        ${escapeHTML(error?.message || 'Tente novamente em alguns instantes.')}
+      </div>`;
+  } finally {
+    if (refreshMyOrdersBtn) refreshMyOrdersBtn.disabled = false;
+  }
+}
+
+myOrdersLink?.addEventListener('click', () => setTimeout(loadMyOrders, 80));
+refreshMyOrdersBtn?.addEventListener('click', loadMyOrders);
+
+goToMyOrdersBtn?.addEventListener('click', () => {
+  closeCheckout();
+  document.getElementById('meus-pedidos')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  setTimeout(loadMyOrders, 180);
+});
+
+myOrdersList?.addEventListener('click', async event => {
+  const button = event.target.closest('[data-copy-tracking]');
+  if (!button) return;
+  const code = button.dataset.copyTracking || '';
+  try {
+    await navigator.clipboard.writeText(code);
+    showToast('Código de rastreio copiado.');
+  } catch {
+    showToast(`Código: ${code}`);
+  }
+});
+
+if (location.hash === '#meus-pedidos') setTimeout(loadMyOrders, 250);

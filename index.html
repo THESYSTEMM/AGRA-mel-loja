@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=20260915-2" />
 </head>
 <body>
   <header class="topbar" id="inicio">
@@ -25,6 +25,7 @@
           <a href="#produtos">Loja</a>
           <a href="#sobre">Sobre</a>
           <a href="#qualidade">Qualidade</a>
+          <a href="#meus-pedidos" id="myOrdersLink">Meus pedidos</a>
           <a class="nav-cta" href="#produtos">Comprar agora</a>
         </nav>
 
@@ -139,6 +140,31 @@
           <article><span>01</span><h3>Sabor natural</h3><p>Produto pensado para quem valoriza qualidade no dia a dia.</p></article>
           <article><span>02</span><h3>Identidade premium</h3><p>Uma marca forte, limpa e preparada para crescer no digital.</p></article>
           <article><span>03</span><h3>Compra fácil</h3><p>Site responsivo e organizado para uma navegação confortável no celular.</p></article>
+        </div>
+      </div>
+    </section>
+
+
+    <section class="section my-orders-section" id="meus-pedidos">
+      <div class="container">
+        <div class="my-orders-head">
+          <div>
+            <span class="eyebrow">Acompanhe sua compra</span>
+            <h2>Meus pedidos</h2>
+            <p>Veja o andamento dos pedidos feitos neste navegador e consulte o código de rastreio quando a encomenda for enviada.</p>
+          </div>
+          <button class="btn btn-ghost my-orders-refresh" id="refreshMyOrders" type="button">Atualizar pedidos</button>
+        </div>
+
+        <div class="my-orders-note">
+          <strong>Importante:</strong> nesta versão sem cadastro de cliente, os pedidos ficam vinculados a este navegador/aparelho.
+        </div>
+
+        <div class="my-orders-list" id="myOrdersList">
+          <div class="my-orders-empty">
+            <div class="my-orders-empty-icon">📦</div>
+            <strong>Carregando seus pedidos…</strong>
+          </div>
         </div>
       </div>
     </section>
@@ -408,7 +434,10 @@
           <span>Status</span>
           <strong>Aguardando integração de pagamento</strong>
         </div>
-        <button class="btn btn-primary" id="finishCheckoutTest" type="button">Voltar para a loja</button>
+        <div class="order-confirm-actions">
+          <button class="btn btn-primary" id="finishCheckoutTest" type="button">Voltar para a loja</button>
+          <button class="btn btn-ghost" id="goToMyOrders" type="button">Acompanhar em Meus pedidos</button>
+        </div>
       </div>
     </section>
   </div>
@@ -419,7 +448,7 @@
   <script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore-compat.js"></script>
   <script src="firebase-config.js"></script>
-  <script src="firebase-service.js?v=20260915-1"></script>
-  <script src="script.js"></script>
+  <script src="firebase-service.js?v=20260915-2"></script>
+  <script src="script.js?v=20260915-2"></script>
 </body>
 </html>

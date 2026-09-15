@@ -19,7 +19,9 @@
     async deleteProduct() { throw new Error('Firebase ainda não configurado.'); },
     async seedProducts() { throw new Error('Firebase ainda não configurado.'); },
     async listOrders() { return []; },
-    async updateOrderStatus() { throw new Error('Firebase ainda não configurado.'); }
+    async listMyOrders() { return []; },
+    async updateOrderStatus() { throw new Error('Firebase ainda não configurado.'); },
+    async updateOrderTracking() { throw new Error('Firebase ainda não configurado.'); }
   };
 
   if (!configured || !window.firebase) {
@@ -171,6 +173,24 @@
     });
 
     return orderRef.id;
+  }
+
+
+  async function listMyOrders() {
+    const user = await ensureShopUser();
+    const snap = await db.collection('orders')
+      .where('customerUid', '==', user.uid)
+      .get();
+
+    const toMillis = value => {
+      if (value?.toMillis) return value.toMillis();
+      const date = value ? new Date(value) : null;
+      return date && !Number.isNaN(date.getTime()) ? date.getTime() : 0;
+    };
+
+    return snap.docs
+      .map(doc => ({ id: doc.id, ...doc.data() }))
+      .sort((a, b) => toMillis(b.createdAt) - toMillis(a.createdAt));
   }
 
   async function isAdminUser(user) {
@@ -367,6 +387,30 @@
     });
   }
 
+
+  async function updateOrderTracking(orderId, tracking = {}) {
+    const admin = await currentAdmin();
+    if (!admin) throw new Error('Sessão administrativa inválida.');
+
+    const id = String(orderId || '').trim();
+    if (!id) throw new Error('Pedido inválido.');
+
+    const carrier = String(tracking.carrier || '').trim().slice(0, 80);
+    const code = String(tracking.code || '').trim().slice(0, 120);
+    const rawUrl = String(tracking.url || '').trim().slice(0, 500);
+    const url = /^https?:\/\//i.test(rawUrl) ? rawUrl : '';
+
+    await db.collection('orders').doc(id).update({
+      tracking: {
+        carrier,
+        code,
+        url,
+        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+      },
+      updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+    });
+  }
+
   window.AgraDB = {
     configured: true,
     ready: Promise.resolve(true),
@@ -381,7 +425,9 @@
     deleteProduct,
     seedProducts,
     listOrders,
-    updateOrderStatus
+    listMyOrders,
+    updateOrderStatus,
+    updateOrderTracking
   };
 
   window.dispatchEvent(new CustomEvent('agra:firebase-ready', { detail: { configured: true } }));

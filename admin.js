@@ -179,6 +179,24 @@ function renderOrders() {
           <button class="secondary-btn" type="button" data-save-status>Atualizar status</button>
           ${stockState}
         </div>
+        <div class="tracking-admin">
+          <div class="tracking-admin-title">
+            <strong>Rastreamento da entrega</strong>
+            <span>Preencha quando o pedido for despachado. O cliente verá estas informações em “Meus pedidos”.</span>
+          </div>
+          <div class="tracking-admin-grid">
+            <label>Transportadora
+              <input data-tracking-carrier value="${escapeHTML(o.tracking?.carrier || '')}" placeholder="Ex.: Correios">
+            </label>
+            <label>Código de rastreio
+              <input data-tracking-code value="${escapeHTML(o.tracking?.code || '')}" placeholder="Ex.: AB123456789BR">
+            </label>
+            <label class="tracking-url-field">Link de rastreio (opcional)
+              <input data-tracking-url value="${escapeHTML(o.tracking?.url || '')}" placeholder="https://...">
+            </label>
+            <button class="secondary-btn tracking-save-btn" type="button" data-save-tracking>Salvar rastreio</button>
+          </div>
+        </div>
       </article>
     `;
   }).join('');
@@ -447,6 +465,27 @@ adminProducts?.addEventListener('click', async event => {
 });
 
 adminOrders?.addEventListener('click', async event => {
+  const trackingBtn = event.target.closest('[data-save-tracking]');
+  if (trackingBtn) {
+    const card = trackingBtn.closest('[data-order-id]');
+    if (!card) return;
+    trackingBtn.disabled = true;
+    try {
+      await db.updateOrderTracking(card.dataset.orderId, {
+        carrier: card.querySelector('[data-tracking-carrier]')?.value || '',
+        code: card.querySelector('[data-tracking-code]')?.value || '',
+        url: card.querySelector('[data-tracking-url]')?.value || ''
+      });
+      showToast('Rastreio salvo.');
+      await loadDashboard();
+    } catch (error) {
+      showToast(error.message || 'Erro ao salvar rastreio.');
+    } finally {
+      trackingBtn.disabled = false;
+    }
+    return;
+  }
+
   const btn = event.target.closest('[data-save-status]');
   if (!btn) return;
   const card = btn.closest('[data-order-id]');
