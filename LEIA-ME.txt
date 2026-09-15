@@ -1,0 +1,19 @@
+CORREÇÃO DE PEDIDOS — AGRA
+
+Substitua estes dois arquivos na RAIZ do repositório GitHub:
+- firebase-service.js
+- index.html
+
+O problema corrigido:
+O cliente anônimo tentava ler o documento do pedido antes de criá-lo.
+As regras do Firestore permitem criar pedidos, mas não permitem que clientes
+leiam pedidos. Isso fazia a criação falhar com permission-denied.
+
+O index.html também recebeu uma versão no carregamento do firebase-service.js
+para evitar que o celular reutilize o JavaScript antigo em cache.
+
+Depois do upload/commit:
+1. Aguarde o GitHub Pages publicar.
+2. No celular, feche a aba antiga.
+3. Abra novamente https://thesystemm.github.io/AGRA-mel-loja/
+4. Faça uma nova compra de teste.

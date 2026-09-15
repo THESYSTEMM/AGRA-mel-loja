@@ -96,9 +96,12 @@
     const productRefs = [...quantities.keys()].map(id => db.collection('products').doc(id));
 
     await db.runTransaction(async transaction => {
-      const existingOrder = await transaction.get(orderRef);
-      if (existingOrder.exists) throw new Error('Este número de pedido já existe. Tente novamente.');
-
+      // Não lemos o documento do pedido antes de criá-lo.
+      // As regras do Firestore permitem ao cliente CRIAR o próprio pedido,
+      // mas não LER pedidos. Tentar transaction.get(orderRef) fazia a criação
+      // falhar com "permission-denied", principalmente percebido no site publicado.
+      // Se por acaso o número já existir, o set será tratado como update e as
+      // próprias regras de segurança bloquearão a operação.
       const productSnaps = await Promise.all(productRefs.map(ref => transaction.get(ref)));
       const liveProducts = new Map();
 
